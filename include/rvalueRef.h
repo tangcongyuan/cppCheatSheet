@@ -1,6 +1,10 @@
 #ifndef __RVALUE_REF__
 #define __RVALUE_REF__
 
+#include <iostream>
+#include <string>
+#include "util.h"
+
 class RvalueRef {
 public:    
     void operator() () const {
@@ -14,12 +18,14 @@ public:
 
 private:
     void printRvalue(std::string&& s) const {
-        std::cout << "Expecting rvalue, received " << s << std::endl;
+        std::cout << "Expecting rvalue, received " << UTIL::MAGENTA 
+            << s << UTIL::RESET << std::endl;
     }
 
     // C++ does not allow modification to temp object, so it has to be const.
     void printLvalue(const std::string& s) const {
-        std::cout << "Expecting lvalue, received " << s << std::endl;
+        std::cout << "Expecting lvalue, received " << UTIL::MAGENTA 
+            << s << UTIL::RESET << std::endl;
     }
 
 };
