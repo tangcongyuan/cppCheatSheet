@@ -7,7 +7,7 @@
 #include <thread>
 #include <vector>
 
-class threadDemo {
+class ThreadDemo {
 public:
     // If following variables are non-static members, they could be initialized like this:
     // threadDemo(const std::string red = std::string("\033[0;31m"),
@@ -22,7 +22,7 @@ public:
         std::mutex mu;
         std::vector<std::thread> threads(N);
         for(int i = 0; i < N; ++i) {
-            threads[i] = std::thread(spawnThread, std::ref(mu), i);
+            threads[i] = std::thread(SpawnThread, std::ref(mu), i);
         }
 
         for(auto& thread : threads)
@@ -36,7 +36,7 @@ private:
     const static std::string green;
     const static std::string reset;
 
-    static void spawnThread(std::mutex& mu, const int i) {
+    static void SpawnThread(std::mutex& mu, const int i) {
         for(int j = 0; j < 10; ++j) {
             std::lock_guard<std::mutex> lk(mu);
             if(i % 2) std::cout << red;
@@ -46,8 +46,8 @@ private:
     }
 };
 
-const std::string threadDemo::red = "\033[0;31m";   // static member should be defined outside the class
-const std::string threadDemo::green = "\033[0;32m"; // static member should be defined outside the class
-const std::string threadDemo::reset = "\033[0m";    // static member should be defined outside the class
+const std::string ThreadDemo::red = "\033[0;31m";   // static member should be defined outside the class
+const std::string ThreadDemo::green = "\033[0;32m"; // static member should be defined outside the class
+const std::string ThreadDemo::reset = "\033[0m";    // static member should be defined outside the class
 
 #endif // __THREAD_DEMO__
